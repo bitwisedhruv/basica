@@ -1,8 +1,8 @@
-import lexer
+import basica
 
 while True:
     text = input("> ")
-    result, error = lexer.run('<stdin>', text)
+    result, error = basica.run('<stdin>', text)
 
     if error: print(error.as_string())
     else: print(result)
