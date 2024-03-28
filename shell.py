@@ -2,7 +2,9 @@ import basica
 
 while True:
     text = input("> ")
-    result, error = basica.run('<stdin>', text)
+    result, error = basica.run("<stdin>", text)
 
-    if error: print(error.as_string())
-    else: print(result)
+    if error:
+        print(error.as_string())
+    elif result:
+        print(result)
