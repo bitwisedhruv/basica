@@ -1,0 +1,31 @@
+"""
+  _____   ____   _____ _____ _______ _____ ____  _   _ 
+ |  __ \ / __ \ / ____|_   _|__   __|_   _/ __ \| \ | |
+ | |__) | |  | | (___   | |    | |    | || |  | |  \| |
+ |  ___/| |  | |\___ \  | |    | |    | || |  | | . ` |
+ | |    | |__| |____) |_| |_   | |   _| || |__| | |\  |
+ |_|     \____/|_____/|_____|  |_|  |_____\____/|_| \_|
+
+"""
+
+
+class Position:
+    def __init__(self, idx, ln, col, fn, ftxt):
+        self.idx = idx
+        self.ln = ln
+        self.col = col
+        self.fn = fn
+        self.ftxt = ftxt
+
+    def advance(self, current_char=None):
+        self.idx += 1
+        self.col += 1
+
+        if current_char == "\n":
+            self.ln += 1
+            self.col = 0
+
+        return self
+
+    def copy(self):
+        return Position(self.idx, self.ln, self.col, self.fn, self.ftxt)
