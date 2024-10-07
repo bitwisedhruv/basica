@@ -1,10 +1,2 @@
-# This is a comment
-
-func oopify(prefix) -> prefix + "oop"
-
-print("Greetings universe")
-
-for i = 0 to 5 then
-    print(oopify("l"))
-    print(oopify("sp"))
-end
+mylist = [1, 2, 3, 4]
+print(len(mylist))

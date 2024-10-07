@@ -625,6 +625,8 @@ class BuiltInFunction(BaseFunction):
             )
         return RTResult().success(Number(len(list_.elements)))
 
+    execute_len.arg_names = ["list"]
+
     def execute_run(self, exec_ctx):
         fn = exec_ctx.symbol_table.get("fn")
 
