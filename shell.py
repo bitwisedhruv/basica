@@ -14,16 +14,24 @@
 #         else:
 #             print(repr(result))
 
-
-
-# shell.py
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import basica
+import os
 
 app = Flask(__name__)
+CORS(app)
+
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "Welcome to the Basica API. Use POST /run with {'code': 'your code'} to execute Basica code."
+    }), 200
 
 @app.route("/run", methods=["POST"])
 def run_code():
+    if not request.is_json:
+        return jsonify({"result": "", "error": "Request must be JSON"}), 400
     text = request.json.get("code", "")
     if not text.strip():
         return jsonify({"result": "", "error": "Empty input"}), 400
@@ -39,6 +47,5 @@ def run_code():
             return jsonify({"result": repr(result), "error": ""}), 200
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-
-
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
