@@ -1,19 +1,3 @@
-# import basica
-
-# while True:
-#     text = input("> ")
-#     if text.strip() == "":
-#         continue
-#     result, error = basica.run("<stdin>", text)
-
-#     if error:
-#         print(error.as_string())
-#     elif result:
-#         if len(result.elements) == 1:
-#             print(repr(result.elements[0]))
-#         else:
-#             print(repr(result))
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import basica
@@ -50,15 +34,15 @@ def run_code():
     
     if error:
         return jsonify({"result": "", "error": error.as_string()}), 200
-    elif captured_output:  # Return captured stdout if present
+    elif captured_output:
         return jsonify({"result": captured_output, "error": ""}), 200
-    elif result and result.elements:  # Fallback to result.elements if no stdout
+    elif result and result.elements:
         if len(result.elements) == 1:
             return jsonify({"result": repr(result.elements[0]), "error": ""}), 200
         else:
             return jsonify({"result": repr(result), "error": ""}), 200
     else:
-        return jsonify({"result": "None", "error": ""}), 200  # Default case
+        return jsonify({"result": "None", "error": ""}), 200
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
